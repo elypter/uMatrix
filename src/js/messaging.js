@@ -352,6 +352,9 @@ var onMessage = function(request, sender, callback) {
     case 'applyDiffToPermanentMatrix': // aka "persist"
         if ( µm.pMatrix.applyDiff(request.diff, µm.tMatrix) ) {
             µm.saveMatrix();
+            if( µm.userSettings.reloadOnSave ){
+                µm.forceReload(request.tabId);
+            }
         }
         break;
 

@@ -1246,7 +1246,8 @@ function updatePersistButton() {
 function persistMatrix() {
     var request = {
         what: 'applyDiffToPermanentMatrix',
-        diff: matrixSnapshot.diff
+        diff: matrixSnapshot.diff,
+        tabId: matrixSnapshot.tabId
     };
     messager.send(request, updateMatrixSnapshot);
 }
