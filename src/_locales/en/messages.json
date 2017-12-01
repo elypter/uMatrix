@@ -11,6 +11,10 @@
         "message": "uMatrix — Dashboard",
         "description": ""
     },
+    "loggerPageName": {
+        "message": "uMatrix — Logger",
+        "description": "Title for the logger window"
+    },
     "settingsPageName": {
         "message": "Settings",
         "description": "a tab in dashboard"
@@ -96,7 +100,7 @@
         "description": "Tool tip for the revert local permission button"
     },
     "matrixReloadButton" : {
-        "message": "Reload the page.",
+        "message": "Reload the page.\nPress Shift to bypass the browser cache.",
         "description": "Tool tip for the reload button"
     },
     "matrix1stPartyLabel" : {
@@ -130,6 +134,10 @@
     "matrixDashboardMenuEntry" : {
         "message": "Go to dashboard",
         "description": "A menu entry in the matrix popup"
+    },
+    "matrixNoTabFound" : {
+        "message": "No web page found",
+        "description": "Displays in place of matrix when no data is found for the current page"
     },
 
     "statsPageTitle" : {
@@ -259,8 +267,8 @@
         "description": ""
     },
     "settingsMatrixDisplayHeader" : {
-        "message": "Appearance",
-        "description": ""
+        "message": "Matrix",
+        "description": "header for matrix settings used in Settings page"
     },
     "settingsMatrixDisplayTextSizePrompt" : {
         "message": "Text size:",
@@ -281,6 +289,22 @@
     "settingsMatrixConvenienceHeader" : {
         "message": "Convenience",
         "description": "English: Convenience"
+    },
+    "settingsDefaultScopeLevel" : {
+        "message": "Default scope level:",
+        "description": "Label for default scope level selector in Settings pane"
+    },
+    "settingsDefaultScopeLevel0" : {
+        "message": "Global",
+        "description": "Scope will be global"
+    },
+    "settingsDefaultScopeLevel1" : {
+        "message": "Domain",
+        "description": "Scope will be base domain"
+    },
+    "settingsDefaultScopeLevel2" : {
+        "message": "Site",
+        "description": "Scope will be full hostname of site"
     },
     "settingsMatrixAutoReloadPrompt" : {
         "message": "When the matrix is closed, smart reload these tabs:",

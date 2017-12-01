@@ -32,6 +32,70 @@
 /******************************************************************************/
 /******************************************************************************/
 
+// Stuff which is good to do very early so as to avoid visual glitches.
+
+(function() {
+    var paneContentPaddingTop,
+        touchDevice;
+    try {
+        paneContentPaddingTop = localStorage.getItem('paneContentPaddingTop');
+        touchDevice = localStorage.getItem('touchDevice');
+    } catch(ex) {
+    }
+
+    if ( typeof paneContentPaddingTop === 'string' ) {
+        document.querySelector('.paneContent').style.setProperty(
+            'padding-top',
+            paneContentPaddingTop
+        );
+    }
+    if ( touchDevice === 'true' ) {
+        document.body.setAttribute('data-touch', 'true');
+    } else {
+        document.addEventListener('touchstart', function onTouched(ev) {
+            document.removeEventListener(ev.type, onTouched);
+            document.body.setAttribute('data-touch', 'true');
+            try {
+                localStorage.setItem('touchDevice', 'true');
+            } catch(ex) {
+            }
+            resizePopup();
+        });
+    }
+})();
+
+var resizePopup = (function() {
+    var timer;
+    var fix = function() {
+        timer = undefined;
+        var doc = document;
+        // Manually adjust the position of the main matrix according to the
+        // height of the toolbar/matrix header.
+        var paddingTop = (doc.querySelector('.paneHead').clientHeight + 2) + 'px',
+            paneContent = doc.querySelector('.paneContent');
+        if ( paddingTop !== paneContent.style.paddingTop ) {
+            paneContent.style.setProperty('padding-top', paddingTop);
+            try {
+                localStorage.setItem('paneContentPaddingTop', paddingTop);
+            } catch(ex) {
+            }
+        }
+        document.body.classList.toggle(
+            'hConstrained',
+            window.innerWidth < document.body.clientWidth
+        );
+    };
+    return function() {
+        if ( timer !== undefined ) {
+            clearTimeout(timer);
+        }
+        timer = vAPI.setTimeout(fix, 97);
+    };
+})();
+
+/******************************************************************************/
+/******************************************************************************/
+
 // Must be consistent with definitions in matrix.js
 var Pale        = 0x00;
 var Dark        = 0x80;
@@ -102,8 +166,8 @@ var messager = vAPI.messaging.channel('popup.js');
 /******************************************************************************/
 
 function getUserSetting(setting) {
-    return matrixSnapshot.userSettings[setting];
-}
+        return matrixSnapshot.userSettings[setting];
+    }
 
 function setUserSetting(setting, value) {
     matrixSnapshot.userSettings[setting] = value;
@@ -160,8 +224,7 @@ function getGroupStats() {
     // hierarchy is white or blacklisted
     var pageDomain = matrixSnapshot.domain;
     var rows = matrixSnapshot.rows;
-    var columnOffsets = matrixSnapshot.headers;
-    var anyTypeOffset = columnOffsets['*'];
+    var anyTypeOffset = matrixSnapshot.headerIndices.get('*');
     var hostname, domain;
     var row, color, count, groupIndex;
     var domainToGroupMap = {};
@@ -285,11 +348,11 @@ function getGroupStats() {
 // helpers
 
 function getTemporaryColor(hostname, type) {
-    return matrixSnapshot.rows[hostname].temporary[matrixSnapshot.headers[type]];
+    return matrixSnapshot.rows[hostname].temporary[matrixSnapshot.headerIndices.get(type)];
 }
 
 function getPermanentColor(hostname, type) {
-    return matrixSnapshot.rows[hostname].permanent[matrixSnapshot.headers[type]];
+    return matrixSnapshot.rows[hostname].permanent[matrixSnapshot.headerIndices.get(type)];
 }
 
 function addCellClass(cell, hostname, type) {
@@ -310,7 +373,7 @@ function getCollapseState(domain) {
     if ( typeof states === 'object' && states[domain] !== undefined ) {
         return states[domain];
     }
-    return getUISetting('popupCollapseDomains') === true;
+    return matrixSnapshot.collapseAllDomains === true;
 }
 
 function toggleCollapseState(elem) {
@@ -319,14 +382,13 @@ function toggleCollapseState(elem) {
     } else {
         toggleSpecificCollapseState(elem);
     }
-    resizePopup();
 }
 
 function toggleMainCollapseState(uelem) {
     var matHead = uelem.ancestors('#matHead.collapsible').toggleClass('collapsed');
-    var collapsed = matHead.hasClass('collapsed');
+    var collapsed = matrixSnapshot.collapseAllDomains = matHead.hasClass('collapsed');
     uDom('#matList .matSection.collapsible').toggleClass('collapsed', collapsed);
-    setUISetting('popupCollapseDomains', collapsed);
+    setUserSetting('popupCollapseAllDomains', collapsed);
 
     var specificCollapseStates = getUISetting('popupCollapseSpecificDomains') || {};
     var domains = Object.keys(specificCollapseStates);
@@ -347,7 +409,7 @@ function toggleSpecificCollapseState(uelem) {
     var section = uelem.ancestors('.matSection.collapsible').toggleClass('collapsed'),
         domain = expandosFromNode(section).domain,
         collapsed = section.hasClass('collapsed'),
-        mainCollapseState = getUISetting('popupCollapseDomains') === true,
+        mainCollapseState = matrixSnapshot.collapseAllDomains === true,
         specificCollapseStates = getUISetting('popupCollapseSpecificDomains') || {};
     if ( collapsed !== mainCollapseState ) {
         specificCollapseStates[domain] = collapsed;
@@ -366,7 +428,7 @@ function updateMatrixCounts() {
     var matCells = uDom('.matrix .matRow.rw > .matCell'),
         i = matCells.length,
         matRow, matCell, count, counts,
-        headers = matrixSnapshot.headers,
+        headerIndices = matrixSnapshot.headerIndices,
         rows = matrixSnapshot.rows,
         expandos;
     while ( i-- ) {
@@ -377,7 +439,7 @@ function updateMatrixCounts() {
         }
         matRow = matCell.parentNode;
         counts = matRow.classList.contains('meta') ? 'totals' : 'counts';
-        count = rows[expandos.hostname][counts][headers[expandos.reqType]];
+        count = rows[expandos.hostname][counts][headerIndices.get(expandos.reqType)];
         if ( count === expandos.count ) { continue; }
         expandos.count = count;
         matCell.textContent = count ? count : '\u00A0';
@@ -398,7 +460,6 @@ function updateMatrixColors() {
         expandos = expandosFromNode(cell);
         addCellClass(cell, expandos.hostname, expandos.reqType);
     }
-    resizePopup();
 }
 
 /******************************************************************************/
@@ -544,7 +605,7 @@ var createMatrixRow = function() {
 
 function renderMatrixHeaderRow() {
     var matHead = uDom('#matHead.collapsible');
-    matHead.toggleClass('collapsed', getUISetting('popupCollapseDomains') === true);
+    matHead.toggleClass('collapsed', matrixSnapshot.collapseAllDomains === true);
     var cells = matHead.descendants('.matCell'), cell, expandos;
     cell = cells.nodeAt(0);
     expandos = expandosFromNode(cell);
@@ -643,15 +704,15 @@ function renderMatrixCellType(cell, hostname, type, count) {
 
 function renderMatrixCellTypes(cells, hostname, countName) {
     var counts = matrixSnapshot.rows[hostname][countName];
-    var countIndices = matrixSnapshot.headers;
-    renderMatrixCellType(cells.at(1), hostname, 'cookie', counts[countIndices.cookie]);
-    renderMatrixCellType(cells.at(2), hostname, 'css', counts[countIndices.css]);
-    renderMatrixCellType(cells.at(3), hostname, 'image', counts[countIndices.image]);
-    renderMatrixCellType(cells.at(4), hostname, 'media', counts[countIndices.media]);
-    renderMatrixCellType(cells.at(5), hostname, 'script', counts[countIndices.script]);
-    renderMatrixCellType(cells.at(6), hostname, 'xhr', counts[countIndices.xhr]);
-    renderMatrixCellType(cells.at(7), hostname, 'frame', counts[countIndices.frame]);
-    renderMatrixCellType(cells.at(8), hostname, 'other', counts[countIndices.other]);
+    var headerIndices = matrixSnapshot.headerIndices;
+    renderMatrixCellType(cells.at(1), hostname, 'cookie', counts[headerIndices.get('cookie')]);
+    renderMatrixCellType(cells.at(2), hostname, 'css', counts[headerIndices.get('css')]);
+    renderMatrixCellType(cells.at(3), hostname, 'image', counts[headerIndices.get('image')]);
+    renderMatrixCellType(cells.at(4), hostname, 'media', counts[headerIndices.get('media')]);
+    renderMatrixCellType(cells.at(5), hostname, 'script', counts[headerIndices.get('script')]);
+    renderMatrixCellType(cells.at(6), hostname, 'xhr', counts[headerIndices.get('xhr')]);
+    renderMatrixCellType(cells.at(7), hostname, 'frame', counts[headerIndices.get('frame')]);
+    renderMatrixCellType(cells.at(8), hostname, 'other', counts[headerIndices.get('other')]);
 }
 
 /******************************************************************************/
@@ -698,36 +759,37 @@ function renderMatrixMetaCellType(cell, count) {
 }
 
 function makeMatrixMetaRow(totals) {
-    var typeOffsets = matrixSnapshot.headers;
-    var matrixRow = createMatrixRow().at(0).addClass('ro');
-    var cells = matrixRow.descendants('.matCell');
-    var contents = cells.at(0).addClass('t81').contents();
-    var expandos = expandosFromNode(cells.nodeAt(0));
+    var headerIndices = matrixSnapshot.headerIndices,
+        matrixRow = createMatrixRow().at(0).addClass('ro'),
+        cells = matrixRow.descendants('.matCell'),
+        contents = cells.at(0).addClass('t81').contents(),
+        expandos = expandosFromNode(cells.nodeAt(0));
     expandos.hostname = '';
     expandos.reqType = '*';
     contents.nodeAt(0).textContent = ' ';
     contents.nodeAt(1).textContent = blacklistedHostnamesLabel.replace(
         '{{count}}',
-        totals[typeOffsets['*']].toLocaleString()
+        totals[headerIndices.get('*')].toLocaleString()
     );
-    renderMatrixMetaCellType(cells.at(1), totals[typeOffsets.cookie]);
-    renderMatrixMetaCellType(cells.at(2), totals[typeOffsets.css]);
-    renderMatrixMetaCellType(cells.at(3), totals[typeOffsets.image]);
-    renderMatrixMetaCellType(cells.at(4), totals[typeOffsets.media]);
-    renderMatrixMetaCellType(cells.at(5), totals[typeOffsets.script]);
-    renderMatrixMetaCellType(cells.at(6), totals[typeOffsets.xhr]);
-    renderMatrixMetaCellType(cells.at(7), totals[typeOffsets.frame]);
-    renderMatrixMetaCellType(cells.at(8), totals[typeOffsets.other]);
+    renderMatrixMetaCellType(cells.at(1), totals[headerIndices.get('cookie')]);
+    renderMatrixMetaCellType(cells.at(2), totals[headerIndices.get('css')]);
+    renderMatrixMetaCellType(cells.at(3), totals[headerIndices.get('image')]);
+    renderMatrixMetaCellType(cells.at(4), totals[headerIndices.get('media')]);
+    renderMatrixMetaCellType(cells.at(5), totals[headerIndices.get('script')]);
+    renderMatrixMetaCellType(cells.at(6), totals[headerIndices.get('xhr')]);
+    renderMatrixMetaCellType(cells.at(7), totals[headerIndices.get('frame')]);
+    renderMatrixMetaCellType(cells.at(8), totals[headerIndices.get('other')]);
     return matrixRow;
 }
 
 /******************************************************************************/
 
 function computeMatrixGroupMetaStats(group) {
-    var headers = matrixSnapshot.headers;
-    var n = Object.keys(headers).length;
-    var totals = new Array(n);
-    var i = n;
+    var headerIndices = matrixSnapshot.headerIndices,
+        anyTypeIndex = headerIndices.get('*'),
+        n = headerIndices.size,
+        totals = new Array(n),
+        i = n;
     while ( i-- ) {
         totals[i] = 0;
     }
@@ -740,7 +802,7 @@ function computeMatrixGroupMetaStats(group) {
         if ( group.hasOwnProperty(row.domain) === false ) {
             continue;
         }
-        if ( row.counts[headers['*']] === 0 ) {
+        if ( row.counts[anyTypeIndex] === 0 ) {
             continue;
         }
         totals[0] += 1;
@@ -971,7 +1033,7 @@ function makeMatrixGroup4(group) {
     var groupDiv = createMatrixGroup().addClass('g4');
     createMatrixSection()
         .addClass('g4Meta')
-        .toggleClass('g4Collapsed', !!getUISetting('popupHideBlacklisted'))
+        .toggleClass('g4Collapsed', !!matrixSnapshot.collapseBlacklistedDomains)
         .appendTo(groupDiv);
     makeMatrixMetaRow(computeMatrixGroupMetaStats(group), 'g4')
         .appendTo(groupDiv);
@@ -989,9 +1051,7 @@ function makeMatrixGroup4(group) {
 var makeMenu = function() {
     var groupStats = getGroupStats();
 
-    if ( Object.keys(groupStats).length === 0 ) {
-        return;
-    }
+    if ( Object.keys(groupStats).length === 0 ) { return; }
 
     // https://github.com/gorhill/httpswitchboard/issues/31
     if ( matrixCellHotspots ) {
@@ -1018,9 +1078,15 @@ var makeMenu = function() {
 // Do all the stuff that needs to be done before building menu et al.
 
 function initMenuEnvironment() {
-    uDom('body').css('font-size', getUserSetting('displayTextSize'));
-    uDom('body').toggleClass('colorblind', getUserSetting('colorBlindFriendly') === true);
-    uDom('#version').text(matrixSnapshot.appVersion || '');
+    document.body.style.setProperty(
+        'font-size',
+        getUserSetting('displayTextSize')
+    );
+    document.body.classList.toggle(
+        'colorblind',
+        getUserSetting('colorBlindFriendly')
+    );
+    uDom.nodeFromId('version').textContent = matrixSnapshot.appVersion || '';
 
     var prettyNames = matrixHeaderPrettyNames;
     var keys = Object.keys(prettyNames);
@@ -1043,59 +1109,82 @@ function initMenuEnvironment() {
 // Create page scopes for the web page
 
 function selectGlobalScope() {
-    setUserSetting('popupScopeLevel', '*');
+    if ( matrixSnapshot.scope === '*' ) { return; }
+    matrixSnapshot.scope = '*';
+    document.body.classList.add('globalScope');
     matrixSnapshot.tMatrixModifiedTime = undefined;
     updateMatrixSnapshot();
     dropDownMenuHide();
 }
 
-function selectDomainScope() {
-    setUserSetting('popupScopeLevel', 'domain');
+function selectSpecificScope(ev) {
+    var newScope = ev.target.getAttribute('data-scope');
+    if ( !newScope || matrixSnapshot.scope === newScope ) { return; }
+    document.body.classList.remove('globalScope');
+    matrixSnapshot.scope = newScope;
     matrixSnapshot.tMatrixModifiedTime = undefined;
     updateMatrixSnapshot();
     dropDownMenuHide();
-}
-
-function selectSiteScope() {
-    setUserSetting('popupScopeLevel', 'site');
-    matrixSnapshot.tMatrixModifiedTime = undefined;
-    updateMatrixSnapshot();
-    dropDownMenuHide();
-}
-
-function getClassFromScope() {
-    if ( matrixSnapshot.scope === '*' ) {
-        return 'tScopeGlobal';
-    }
-    if ( matrixSnapshot.scope === matrixSnapshot.domain ) {
-        return 'tScopeDomain';
-    }
-    return 'tScopeSite';
 }
 
 function initScopeCell() {
     // It's possible there is no page URL at this point: some pages cannot
-    // be filtered by µMatrix.
-    if ( matrixSnapshot.url === '' ) {
-        return;
+    // be filtered by uMatrix.
+    if ( matrixSnapshot.url === '' ) { return; }
+    var specificScope = uDom.nodeFromId('specificScope');
+
+    while ( specificScope.firstChild !== null ) {
+        specificScope.removeChild(specificScope.firstChild);
     }
+
     // Fill in the scope menu entries
-    if ( matrixSnapshot.hostname === matrixSnapshot.domain ) {
-        uDom('#scopeKeySite').css('display', 'none');
+    var pos = matrixSnapshot.domain.indexOf('.');
+    var tld, labels;
+    if ( pos === -1 ) {
+        tld = '';
+        labels = matrixSnapshot.hostname;
     } else {
-        uDom('#scopeKeySite').text(punycode.toUnicode(matrixSnapshot.hostname));
+        tld = matrixSnapshot.domain.slice(pos + 1);
+        labels = matrixSnapshot.hostname.slice(0, -tld.length);
     }
-    uDom('#scopeKeyDomain').text(punycode.toUnicode(matrixSnapshot.domain));
+    var beg = 0, span;
+    while ( beg < labels.length ) {
+        pos = labels.indexOf('.', beg);
+        if ( pos === -1 ) {
+            pos = labels.length;
+        } else {
+            pos += 1;
+        }
+        span = document.createElement('span');
+        span.setAttribute('data-scope', labels.slice(beg) + tld);
+        span.appendChild(
+            document.createTextNode(punycode.toUnicode(labels.slice(beg, pos)))
+        );
+        specificScope.appendChild(span);
+        beg = pos;
+    }
+    if ( tld !== '' ) {
+        span = document.createElement('span');
+        span.setAttribute('data-scope', tld);
+        span.appendChild(document.createTextNode(punycode.toUnicode(tld)));
+        specificScope.appendChild(span);
+    }
     updateScopeCell();
 }
 
 function updateScopeCell() {
-    uDom('body')
-        .removeClass('tScopeGlobal tScopeDomain tScopeSite')
-        .addClass(getClassFromScope());
-    uDom('#scopeCell').text(
-        punycode.toUnicode(matrixSnapshot.scope).replace('*', '\u2217')
-    );
+    var specificScope = uDom.nodeFromId('specificScope'),
+        isGlobal = matrixSnapshot.scope === '*';
+    document.body.classList.toggle('globalScope', isGlobal);
+    specificScope.classList.toggle('on', !isGlobal);
+    uDom.nodeFromId('globalScope').classList.toggle('on', isGlobal);
+    for ( var node of specificScope.children ) {
+        node.classList.toggle(
+            'on', 
+            !isGlobal &&
+                matrixSnapshot.scope.endsWith(node.getAttribute('data-scope'))
+        );
+    }
 }
 
 /******************************************************************************/
@@ -1197,10 +1286,11 @@ function revertAll() {
 
 /******************************************************************************/
 
-function buttonReloadHandler() {
+function buttonReloadHandler(ev) {
     messager.send({
         what: 'forceReloadTab',
-        tabId: matrixSnapshot.tabId
+        tabId: matrixSnapshot.tabId,
+        bypassCache: ev.shiftKey
     });
 }
 
@@ -1246,6 +1336,13 @@ function dropDownMenuHide() {
 /******************************************************************************/
 
 var onMatrixSnapshotReady = function(response) {
+    if ( response === 'ENOTFOUND' ) {
+        uDom.nodeFromId('noTabFound').textContent =
+            vAPI.i18n('matrixNoTabFound');
+        document.body.classList.add('noTabFound');
+        return;
+    }
+
     // Now that tabId and pageURL are set, we can build our menu
     initMenuEnvironment();
     makeMenu();
@@ -1253,7 +1350,7 @@ var onMatrixSnapshotReady = function(response) {
     // After popup menu is built, check whether there is a non-empty matrix
     if ( matrixSnapshot.url === '' ) {
         uDom('#matHead').remove();
-        uDom('#toolbarLeft').remove();
+        uDom('#toolbarContainer').remove();
 
         // https://github.com/gorhill/httpswitchboard/issues/191
         uDom('#noNetTrafficPrompt').text(vAPI.i18n('matrixNoNetTrafficPrompt'));
@@ -1267,31 +1364,15 @@ var onMatrixSnapshotReady = function(response) {
 
 /******************************************************************************/
 
-var resizePopup = (function() {
-    var timer;
-    var fix = function() {
-        timer = undefined;
-        var doc = document;
-        // Manually adjust the position of the main matrix according to the
-        // height of the toolbar/matrix header.
-        doc.querySelector('.paneContent').style.setProperty(
-            'padding-top',
-            (doc.querySelector('.paneHead').clientHeight + 2) + 'px'
-        );
-        doc.body.setAttribute('data-resize-popup', 'true');
-    };
-    return function() {
-        if ( timer !== undefined ) {
-            clearTimeout(timer);
-        }
-        timer = vAPI.setTimeout(fix, 97);
-    };
-})();
-
-/******************************************************************************/
-
 var matrixSnapshotPoller = (function() {
     var timer = null;
+
+    var preprocessMatrixSnapshot = function(snapshot) {
+        if ( Array.isArray(snapshot.headerIndices) ) {
+            snapshot.headerIndices = new Map(snapshot.headerIndices);
+        }
+        return snapshot;
+    };
 
     var processPollResult = function(response) {
         if ( typeof response !== 'object' ) {
@@ -1305,7 +1386,8 @@ var matrixSnapshotPoller = (function() {
         ) {
             return;
         }
-        matrixSnapshot = response;
+        matrixSnapshot = preprocessMatrixSnapshot(response);
+
         if ( response.mtxContentModified ) {
             makeMenu();
             return;
@@ -1334,6 +1416,7 @@ var matrixSnapshotPoller = (function() {
         messager.send({
             what: 'matrixSnapshot',
             tabId: matrixSnapshot.tabId,
+            scope: matrixSnapshot.scope,
             mtxContentModifiedTime: matrixSnapshot.mtxContentModifiedTime,
             mtxCountModifiedTime: matrixSnapshot.mtxCountModifiedTime,
             mtxDiffCount: matrixSnapshot.diff.length,
@@ -1379,9 +1462,9 @@ var matrixSnapshotPoller = (function() {
 
         var snapshotFetched = function(response) {
             if ( typeof response === 'object' ) {
-                matrixSnapshot = response;
+                matrixSnapshot = preprocessMatrixSnapshot(response);
             }
-            onMatrixSnapshotReady();
+            onMatrixSnapshotReady(response);
             pollAsync();
         };
 
@@ -1418,9 +1501,8 @@ matrixCellHotspots = uDom('#cellHotspots').detach();
 uDom('body')
     .on('mouseenter', '.matCell', mouseenterMatrixCellHandler)
     .on('mouseleave', '.matCell', mouseleaveMatrixCellHandler);
-uDom('#scopeKeyGlobal').on('click', selectGlobalScope);
-uDom('#scopeKeyDomain').on('click', selectDomainScope);
-uDom('#scopeKeySite').on('click', selectSiteScope);
+uDom('#specificScope').on('click', selectSpecificScope);
+uDom('#globalScope').on('click', selectGlobalScope);
 uDom('[id^="mtxSwitch_"]').on('click', toggleMatrixSwitch);
 uDom('#buttonPersist').on('click', persistMatrix);
 uDom('#buttonRevertScope').on('click', revertMatrix);
@@ -1432,15 +1514,14 @@ uDom('.extensionURL').on('click', gotoExtensionURL);
 uDom('body').on('click', '.dropdown-menu-button', dropDownMenuShow);
 uDom('body').on('click', '.dropdown-menu-capture', dropDownMenuHide);
 
-uDom('#matList').on('click', '.g4Meta', function() {
-    var collapsed = uDom(this)
-        .toggleClass('g4Collapsed')
-        .hasClass('g4Collapsed');
-    setUISetting('popupHideBlacklisted', collapsed);
-    resizePopup();
+uDom('#matList').on('click', '.g4Meta', function(ev) {
+    matrixSnapshot.collapseBlacklistedDomains =
+        ev.target.classList.toggle('g4Collapsed');
+    setUserSetting(
+        'popupCollapseBlacklistedDomains',
+        matrixSnapshot.collapseBlacklistedDomains
+    );
 });
-
-resizePopup();
 
 /******************************************************************************/
 

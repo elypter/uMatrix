@@ -1,14 +1,14 @@
 {
     "extName": {
-        "message": "µMatrix",
+        "message": "uMatrix",
         "description": ""
     },
     "extShortDesc": {
-        "message": "Chỉ cần click để chặn\/cho phép mọi loại yêu cầu của trình duyệt. Dùng để chặn script, iframe, quảng cáo, facebook,...",
+        "message": "Point & click to forbid\/allow any class of requests made by your browser. Use it to block scripts, iframes, ads, facebook, etc.",
         "description": "this will be used as short description in web stores: MUST BE 132 characters OR LESS"
     },
     "dashboardPageName": {
-        "message": "µMatrix — Bảng điều khiển",
+        "message": "uMatrix — Panelo",
         "description": ""
     },
     "loggerPageName": {
@@ -16,35 +16,35 @@
         "description": "Title for the logger window"
     },
     "settingsPageName": {
-        "message": "Cài đặt",
+        "message": "Agordoj",
         "description": "a tab in dashboard"
     },
     "privacyPageName": {
-        "message": "Riêng tư",
+        "message": "Privateco",
         "description": "a tab in dashboard"
     },
     "statsPageName": {
-        "message": "Thống kê",
+        "message": "Statistics",
         "description": "a tab in dashboard"
     },
     "userRulesPageName": {
-        "message": "Quy tắc riêng",
+        "message": "Miaj reguloj",
         "description": "a tab in dashboard"
     },
     "ubiquitousRulesPageName": {
-        "message": "Tập tin máy chủ",
+        "message": "Hosts files",
         "description": "a tab in dashboard"
     },
     "aboutPageName": {
-        "message": "Thông tin",
+        "message": "Pri",
         "description": "a tab in dashboard"
     },
     "allPrettyName": {
-        "message": "tất cả",
+        "message": "all",
         "description": "HAS TO FIT IN MATRIX HEADER!"
     },
     "cookiePrettyName": {
-        "message": "cookie",
+        "message": "kuketo",
         "description": "HAS TO FIT IN MATRIX HEADER!"
     },
     "cssPrettyName": {
@@ -52,7 +52,7 @@
         "description": "HAS TO FIT IN MATRIX HEADER!"
     },
     "imagePrettyName": {
-        "message": "ảnh",
+        "message": "bildo",
         "description": "HAS TO FIT IN MATRIX HEADER!"
     },
     "mediaPrettyName": {
@@ -60,11 +60,11 @@
         "description": "HAS TO FIT IN MATRIX HEADER!"
     },
     "pluginPrettyName": {
-        "message": "plugin",
+        "message": "kromaĵo",
         "description": "HAS TO FIT IN MATRIX HEADER!"
     },
     "scriptPrettyName": {
-        "message": "script",
+        "message": "skripto",
         "description": "HAS TO FIT IN MATRIX HEADER!"
     },
     "xhrPrettyName": {
@@ -72,63 +72,63 @@
         "description": "HAS TO FIT IN MATRIX HEADER!"
     },
     "framePrettyName": {
-        "message": "frame",
+        "message": "kadro",
         "description": "HAS TO FIT IN MATRIX HEADER!"
     },
     "otherPrettyName": {
-        "message": "khác",
+        "message": "alia",
         "description": "HAS TO FIT IN MATRIX HEADER!"
     },
     "matrixNoNetTrafficPrompt": {
-        "message": "Chưa phát hiện lưu lượng mạng trong thẻ này.",
+        "message": "No net traffic seen for this tab so far.",
         "description": ""
     },
     "matrixMtxButtonTip": {
-        "message": "Vô hiệu\/kích hoạt lọc ma trận cho phạm vi này.\nYêu cầu đã chặn thông qua lọc ma trận trên trang này: {{count}}.",
+        "message": "Disable\/enable matrix filtering for this scope.",
         "description": "Tool tip for matrix button"
     },
     "matrixPersistButtonTip": {
-        "message": "Lưu tất cả thay đổi tạm thời cho phạm vi này.",
+        "message": "Save all temporary changes for this scope.",
         "description": "Tool tip for the persist button"
     },
     "matrixRevertButtonTip": {
-        "message": "Xoá thay đổi tạm thời của phạm vị này.",
+        "message": "Revert temporary changes for this scope.",
         "description": "Tool tip for the revert local permission button"
     },
     "matrixReloadButton": {
-        "message": "Tải lại trang.",
+        "message": "Reŝargi la paĝon.",
         "description": "Tool tip for the reload button"
     },
     "matrix1stPartyLabel": {
-        "message": "bên thứ nhất",
+        "message": "1st-party",
         "description": "1st-party"
     },
     "matrixBlacklistedHostnames": {
-        "message": "{{count}}  tên máy chủ trong danh sách đen",
+        "message": "{{count}} blacklisted hostname(s)",
         "description": "Appears in the metadata row of bottom-most group: **mind the limited width**"
     },
     "matrixSwitchNoMixedContent": {
-        "message": "HTTPS nghiêm ngặt",
+        "message": "Strict HTTPS",
         "description": "A menu entry in the matrix popup"
     },
     "matrixSwitchUASpoof": {
-        "message": "Giả đại diện trình duyệt",
+        "message": "User agent spoofing",
         "description": "A menu entry in the matrix popup"
     },
     "matrixSwitchReferrerSpoof": {
-        "message": "Giả tham chiếu",
+        "message": "Referrer spoofing",
         "description": "A menu entry in the matrix popup"
     },
     "matrixRevertAllEntry": {
-        "message": "Hủy các thay đổi tạm thời",
+        "message": "Revert all temporary changes",
         "description": "A menu entry in the matrix popup"
     },
     "matrixLoggerMenuEntry": {
-        "message": "Đến nhật ký",
+        "message": "Iri al protokolilo",
         "description": "A menu entry in the matrix popup"
     },
     "matrixDashboardMenuEntry": {
-        "message": "Đến bảng điều khiển",
+        "message": "Iri al panelo",
         "description": "A menu entry in the matrix popup"
     },
     "matrixNoTabFound": {
@@ -136,75 +136,75 @@
         "description": "Displays in place of matrix when no data is found for the current page"
     },
     "statsPageTitle": {
-        "message": "Thống kê µMatrix",
+        "message": "uMatrix &ndash; Statistics",
         "description": ""
     },
     "statsPageGenericStats": {
-        "message": "Thống kê tổng quát",
+        "message": "Generic statistics",
         "description": ""
     },
     "statsPageCookieHeadersFoiled": {
-        "message": "<a href='https:\/\/en.wikipedia.org\/wiki\/HTTP_cookie'>Đầu mục cookie HTTP<\/a> bị chặn: {{count}}",
+        "message": "<a href='https:\/\/en.wikipedia.org\/wiki\/HTTP_cookie'>HTTP cookie<\/a> headers foiled: {{count}}",
         "description": ""
     },
     "statsPageRefererHeadersFoiled": {
-        "message": "<a href='https:\/\/en.wikipedia.org\/wiki\/HTTP_cookie'>Đầu mục tham chiếu HTTP<\/a> bị chặn: {{count}}",
+        "message": "<a href='https:\/\/en.wikipedia.org\/wiki\/HTTP_referer'>HTTP referer<\/a> headers foiled: {{count}}",
         "description": ""
     },
     "statsPageHyperlinkAuditingFoiled": {
-        "message": "<a href='http:\/\/www.whatwg.org\/specs\/web-apps\/current-work\/multipage\/links.html#hyperlink-auditing'>Cố gắng kiểm tra siêu liên kết<\/a> bị chặn: {{count}}",
+        "message": "<a href='https:\/\/html.spec.whatwg.org\/multipage\/semantics.html#hyperlink-auditing'>Hyperlink auditing<\/a> attempts foiled: {{count}}",
         "description": ""
     },
     "statsPageCookiesRemoved": {
-        "message": "Cookie trên máy đã xoá: {{count}}",
+        "message": "Lokaj kuketoj forigitaj: {{count}}",
         "description": ""
     },
     "statsPageLocalStoragesCleared": {
-        "message": "<a href='http:\/\/diveintohtml5.info\/storage.html'>Lưu trữ trên máy<\/a> đã làm rỗng: {{count}}",
+        "message": "<a href='http:\/\/diveintohtml5.info\/storage.html'>Lokaj konservadoj<\/a> malplenigitaj: {{count}}",
         "description": ""
     },
     "statsPageBrowserCacheCleared": {
-        "message": "Bộ nhớ đệm trình duyệt đã xoá: {{count}}",
+        "message": "Browser caches cleared: {{count}}",
         "description": ""
     },
     "statsPageDetailedStats": {
-        "message": "Thống kê chi tiết",
+        "message": "Detailed statistics",
         "description": ""
     },
     "statsPageDetailedAllPages": {
-        "message": "Tất cả",
+        "message": "All",
         "description": ""
     },
     "statsPageDetailedBehindTheScenePage": {
-        "message": "Yêu cầu ẩn",
+        "message": "Behind the scene",
         "description": ""
     },
     "statsPageOverview": {
-        "message": "Tổng quan",
+        "message": "Superrigardo",
         "description": ""
     },
     "statsPageRequests": {
-        "message": "Yêu cầu",
+        "message": "Petoj",
         "description": "header for the stat type column"
     },
     "statsPageAllowed": {
-        "message": "Đã cho phép",
+        "message": "Allowed",
         "description": "header for the allowed requests column"
     },
     "statsPageBlocked": {
-        "message": "Đã chặn",
+        "message": "Blocked",
         "description": "header for the blocked requests column"
     },
     "statsPageAll": {
-        "message": "Tất cả",
+        "message": "All",
         "description": ""
     },
     "statsPagePages": {
-        "message": "Trang",
+        "message": "Paĝoj",
         "description": ""
     },
     "statsPageCookies": {
-        "message": "Cookie",
+        "message": "Kuketoj",
         "description": ""
     },
     "statsPageCSS": {
@@ -212,39 +212,39 @@
         "description": ""
     },
     "statsPageImages": {
-        "message": "Ảnh",
+        "message": "Bildoj",
         "description": ""
     },
     "statsPagePlugins": {
-        "message": "Plugin",
+        "message": "Kromaĵoj",
         "description": ""
     },
     "statsPageScripts": {
-        "message": "Script",
+        "message": "Skriptoj",
         "description": ""
     },
     "statsPageXHRs": {
-        "message": "XHR",
+        "message": "XHR-oj",
         "description": ""
     },
     "statsPageFrames": {
-        "message": "Frame",
+        "message": "Kadroj",
         "description": ""
     },
     "statsPageOthers": {
-        "message": "Khác",
+        "message": "Aliaj",
         "description": ""
     },
     "statsPageDetailed": {
-        "message": "Nhật ký yêu cầu",
+        "message": "Protokolilo",
         "description": ""
     },
     "statsPageLogSizePrompt1": {
-        "message": "Nhớ mục cuối",
+        "message": "Remember the last",
         "description": "First part of Remember the last [n] HTTP requests per page"
     },
     "statsPageLogSizePrompt2": {
-        "message": "Yêu cầu HTTP <b>mỗi trang<\/b>.",
+        "message": "HTTP requests <b>per page<\/b>.",
         "description": "Second part of Remember the last [n] HTTP requests per page"
     },
     "statsPageLogSizeHelp": {
@@ -252,35 +252,35 @@
         "description": "To help user understand the purpose of the log size value"
     },
     "statsPageRefresh": {
-        "message": "Tải lại",
+        "message": "Aktualigi",
         "description": ""
     },
     "settingsPageTitle": {
-        "message": "Cài đặt µMatrix",
+        "message": "uMatrix &ndash; Agordoj",
         "description": ""
     },
     "settingsMatrixDisplayHeader": {
-        "message": "Diện mạo",
+        "message": "Apero",
         "description": "header for matrix settings used in Settings page"
     },
     "settingsMatrixDisplayTextSizePrompt": {
-        "message": "Cỡ chữ:",
+        "message": "Tekstogrando:",
         "description": ""
     },
     "settingsMatrixDisplayTextSizeNormal": {
-        "message": "Thường",
+        "message": "Normala",
         "description": ""
     },
     "settingsMatrixDisplayTextSizeLarge": {
-        "message": "Lớn",
+        "message": "Granda",
         "description": ""
     },
     "settingsMatrixDisplayColorBlind": {
-        "message": "Thân thiện với người mù màu",
+        "message": "Afabla por kolorblinduloj",
         "description": ""
     },
     "settingsMatrixConvenienceHeader": {
-        "message": "Tiện lợi",
+        "message": "Komforto",
         "description": "English: Convenience"
     },
     "settingsDefaultScopeLevel": {
@@ -300,35 +300,35 @@
         "description": "Scope will be full hostname of site"
     },
     "settingsMatrixAutoReloadPrompt": {
-        "message": "Khi đã đóng ma trận, tải lại thông minh những thẻ này:",
+        "message": "When the matrix is closed, smart reload these tabs:",
         "description": ""
     },
     "settingsMatrixAutoReloadNone": {
-        "message": "Không có",
+        "message": "None",
         "description": ""
     },
     "settingsMatrixAutoReloadCurrent": {
-        "message": "Hiện tại",
+        "message": "Nuna",
         "description": ""
     },
     "settingsMatrixAutoReloadAll": {
-        "message": "Tất cả",
+        "message": "All",
         "description": ""
     },
     "settingsMatrixAutoReloadInfo": {
-        "message": "Bất cứ khi nào bạn tạo ra thay đổi trong ma trận có thể ảnh hưởng đến việc hiển thị và\/hoặc hành vi của một hoặc nhiều trang, <i>µMatrix<\/i> sẽ tự tải lại trang được ảnh hưởng khi bạn đóng ma trận.",
+        "message": "Whenever you make changes in the matrix which can affect the display and\/or behavior of one or more pages, <i>uMatrix<\/i> will reload affected pages automatically when you close the matrix.",
         "description": ""
     },
     "settingsSubframeColor": {
-        "message": "Đã chặn frame:&ensp;Màu",
+        "message": "Blocked frames:&ensp;Color",
         "description": "English: Blocked frames:&ensp;Color"
     },
     "settingsSubframeOpacity": {
-        "message": "Độ mờ",
+        "message": "Opakeco",
         "description": "English: Opacity"
     },
     "settingsIconBadgeEnabled": {
-        "message": "Hiển thị số lượng yêu cầu riêng biệt trên biểu tượng",
+        "message": "Show the number of distinct requests on the icon",
         "description": "English: Show the number of distinct requests on the icon"
     },
     "settingsCollapseBlocked": {
@@ -336,15 +336,15 @@
         "description": "English: Collapse placeholder of blocked elements"
     },
     "settingsCloudStorageEnabled": {
-        "message": "Enable cloud storage support",
+        "message": "Ŝalti subtenon por nuba konservado",
         "description": ""
     },
     "privacyPageTitle": {
-        "message": "µMatrix &ndash; Riêng tư",
+        "message": "uMatrix &ndash; Privateco",
         "description": ""
     },
     "privacyDeleteBlockedCookiesPrompt": {
-        "message": "Xoá cookie đã chặn.",
+        "message": "Delete blocked cookies.",
         "description": ""
     },
     "privacyDeleteBlockedCookiesHelp": {
@@ -352,11 +352,11 @@
         "description": ""
     },
     "privacyDeleteNonBlockedSessionCookiesPrompt1": {
-        "message": "Xoá cookie phiên làm việc không được chặn ",
+        "message": "Delete non-blocked session cookies ",
         "description": "First part of 'Delete non-blocked session cookies [n] minutes after the last time they have been used'"
     },
     "privacyDeleteNonBlockedSessionCookiesPrompt2": {
-        "message": " phút sau lần cuối chúng được dùng.",
+        "message": " minutes after the last time they have been used.",
         "description": "Second part of 'Delete non-blocked session cookies [n] minutes after the last time they have been used'"
     },
     "privacyDeleteNonBlockedSessionCookiesHelp": {
@@ -372,11 +372,11 @@
         "description": ""
     },
     "privacyClearCachePrompt1": {
-        "message": "Xoá bộ đệm trình duyệt mỗi",
+        "message": "Clear browser cache every",
         "description": "First part of 'Clear browser cache every [n] minutes'"
     },
     "privacyClearCachePrompt2": {
-        "message": "phút.",
+        "message": "minutoj.",
         "description": "Second part of 'Clear browser cache every [n] minutes'"
     },
     "privacyClearCacheHelp": {
@@ -392,7 +392,7 @@
         "description": ""
     },
     "privacyNoMixedContentPrompt": {
-        "message": "HTTPS nghiêm ngặt: chặn nội dung hỗn hợp.",
+        "message": "Strict HTTPS: forbid mixed content.",
         "description": ""
     },
     "privacyNoMixedContentHelp": {
@@ -408,11 +408,11 @@
         "description": ""
     },
     "privacySpoofUserAgentPrompt1": {
-        "message": "Ngẫu nhiên giả mạo chuỗi <a href='https:\/\/en.wikipedia.org\/wiki\/User_agent'>Nhận dạng trình duyệt<\/a> bằng cách chọn mục dưới đây mỗi",
+        "message": "Spoof <a href='https:\/\/en.wikipedia.org\/wiki\/User_agent'>User-Agent<\/a> string by randomly picking a new one below every",
         "description": "First part of UA-spoofing prompt"
     },
     "privacySpoofUserAgentPrompt2": {
-        "message": "phút.",
+        "message": "minutoj.",
         "description": "Second part"
     },
     "privacySpoofUserAgentHelp": {
@@ -420,275 +420,275 @@
         "description": ""
     },
     "userRulesPermanentHeader": {
-        "message": "Quy tắc vĩnh viễn",
+        "message": "Daŭraj reguloj",
         "description": ""
     },
     "userRulesTemporaryHeader": {
-        "message": "Quy tắc tạm thời",
+        "message": "Nedaŭraj reguloj",
         "description": ""
     },
     "userRulesRevert": {
-        "message": "Phục hồi",
+        "message": "Malfari",
         "description": "Will remove all temporary rules"
     },
     "userRulesCommit": {
-        "message": "Xác nhận",
+        "message": "Konservi",
         "description": "Will save all temporary rules"
     },
     "userRulesEdit": {
-        "message": "Sửa",
+        "message": "Redakti",
         "description": "Will enable manual-edit mode (textarea)"
     },
     "userRulesEditSave": {
-        "message": "Lưu",
+        "message": "Konservi",
         "description": "Will save manually-edited content and exit manual-edit mode"
     },
     "userRulesEditDicard": {
-        "message": "Huỷ",
+        "message": "Ignori",
         "description": "Will discard manually-edited content and exit manual-edit mode"
     },
     "userRulesImport": {
-        "message": "Nhập từ tập tin...",
+        "message": "Importi el dosiero...",
         "description": ""
     },
     "userRulesExport": {
-        "message": "Xuất ra tập tin...",
+        "message": "Eksporti al dosiero...",
         "description": ""
     },
     "userRulesFormatHint": {
-        "message": "Xem trang này để biết quy tắc cú pháp.",
+        "message": "See this page for rule syntax.",
         "description": ""
     },
     "userRulesDefaultFileName": {
-        "message": "my-umatrix-rules.txt",
+        "message": "miaj-umatrix-reguloj.txt",
         "description": "default file name to use"
     },
     "hostsFilesPrompt": {
-        "message": "Tất cả tên máy chủ trong tập tin máy chủ được nạp là tên máy chủ trong danh sách đen trong phạm vi chung.",
+        "message": "All hostnames in a hosts file are loaded as blacklisted hostnames in the global scope.",
         "description": ""
     },
     "hostsFilesStats": {
-        "message": "{{blockedHostnameCount}} tên máy chủ đã chặn khác biệt  từ:",
+        "message": "{{blockedHostnameCount}} distinct blocked hostnames from:",
         "description": ""
     },
     "hostsFilesPerFileStats": {
-        "message": "{{used}} được dùng trên tổng {{total}}",
+        "message": "{{used}} used out of {{total}}",
         "description": ""
     },
     "hostsFilesLastUpdate": {
-        "message": "Cập nhật: {{ago}}",
+        "message": "Lasta ĝisdatigo: {{ago}}",
         "description": "English: Last update: {{ago}}, where 'ago' will be replaced with something like '2 days ago'"
     },
     "hostsFilesApplyChanges": {
-        "message": "Áp dụng thay đổi",
+        "message": "Apliki ŝanĝojn",
         "description": ""
     },
     "hostsFilesAutoUpdatePrompt": {
-        "message": "Tự động cập nhật tập tin máy chủ.",
+        "message": "Auto-update hosts files.",
         "description": ""
     },
     "hostsFilesUpdateNow": {
-        "message": "Cập nhật ngay",
+        "message": "Ĝisdatigi nun",
         "description": ""
     },
     "hostsFilesPurgeAll": {
-        "message": "Dọn tất cả bộ nhớ đệm",
+        "message": "Malplenigi ĉiujn kaŝmemorojn",
         "description": ""
     },
     "hostsFilesExternalListsHint": {
-        "message": "Một URL mỗi dòng. Các dòng bắt đầu với &lsquo;#&rsquo; sẽ được bỏ qua. URL không hợp lệ sẽ được tự bỏ qua.",
+        "message": "One URL per line. Lines prefixed with &lsquo;#&rsquo; will be ignored. Invalid URLs will be silently ignored.",
         "description": ""
     },
     "hostsFilesExternalListsParse": {
-        "message": "Phân tích",
+        "message": "Analizi",
         "description": ""
     },
     "hostsFilesExternalListPurge": {
-        "message": "dọn bộ nhớ đệm",
+        "message": "malplenigi kaŝmemoron",
         "description": ""
     },
     "hostsFilesExternalListNew": {
-        "message": "có phiên bản mới",
+        "message": "nova versio disponebla",
         "description": ""
     },
     "hostsFilesExternalListObsolete": {
-        "message": "đã cũ",
+        "message": "neĝisdata",
         "description": ""
     },
     "aboutChangelog": {
-        "message": "<a href='https:\/\/github.com\/gorhill\/uMatrix\/releases'>Thay đổi<\/a>",
+        "message": "<a href='https:\/\/github.com\/gorhill\/uMatrix\/releases'>Ŝanĝoprotokolo<\/a>",
         "description": ""
     },
     "aboutStorageUsed": {
-        "message": "Lưu trữ đã dùng: {{storageUsed}} byte",
+        "message": "Storage used: {{storageUsed}} bytes",
         "description": ""
     },
     "aboutDoc": {
-        "message": "<a href='https:\/\/github.com\/gorhill\/uMatrix\/wiki'>Tài liệu<\/a>",
+        "message": "<a href='https:\/\/github.com\/gorhill\/uMatrix\/wiki'>Documentation<\/a>",
         "description": ""
     },
     "aboutPermissions": {
-        "message": "<a href='https:\/\/github.com\/gorhill\/httpswitchboard\/wiki\/Permissions'>Quyền<\/a>",
+        "message": "<a href='https:\/\/github.com\/gorhill\/httpswitchboard\/wiki\/Permissions'>Permissions<\/a>",
         "description": ""
     },
     "aboutCode": {
-        "message": "Mã nguồn (GPLv3)",
+        "message": "Fontkodo (GPLv3)",
         "description": ""
     },
     "aboutIssues": {
-        "message": "Lỗi và vấn đề",
+        "message": "Cimoj kaj problemoj",
         "description": ""
     },
     "aboutContributors": {
-        "message": "Những người đóng góp",
+        "message": "Kontribuantoj",
         "description": "English: Contributors"
     },
     "aboutCodeContributors": {
-        "message": "Mã:",
+        "message": "Kode:",
         "description": ""
     },
     "aboutIssueContributors": {
-        "message": "Vấn đề:",
+        "message": "Problemoj:",
         "description": ""
     },
     "aboutTranslationContributors": {
-        "message": "Bản dịch:",
+        "message": "Tradukoj:",
         "description": ""
     },
     "aboutUserDataHeader": {
-        "message": "Dữ liệu của bạn",
+        "message": "Viaj datumoj",
         "description": ""
     },
     "aboutBackupButton": {
-        "message": "Sao lưu ra tập tin...",
+        "message": "Savkopii al dosiero...",
         "description": ""
     },
     "aboutBackupFilename": {
-        "message": "my-umatrix-backup.txt",
+        "message": "mia-umatrix-savkopio.txt",
         "description": "default filename to use"
     },
     "aboutRestoreButton": {
-        "message": "Phục hồi từ tập tin...",
+        "message": "Restore from file...",
         "description": ""
     },
     "aboutRestoreConfirm": {
-        "message": "Mọi cấu hình của bạn sẽ được thay thế bằng dữ liệu đã sao lưu vào {{time}}, và µMatrix sẽ khởi động lại.\n\nGhi đè tất cả cấu hình hiện tại bằng dữ liệu đã sao lưu?",
+        "message": "All your settings will be overwritten using data backed up on {{time}}, and uMatrix will restart.\n\nOverwrite all existing settings using backed up data?",
         "description": "Message asking user to confirm restore"
     },
     "aboutRestoreError": {
-        "message": "Không thể đọc dữ liệu hoặc dữ liệu không hợp lệ",
+        "message": "The data could not be read or is invalid",
         "description": ""
     },
     "aboutOr": {
-        "message": "... hoặc ...",
+        "message": "... aŭ ...",
         "description": "English: ... or ..."
     },
     "aboutResetButton": {
-        "message": "Phục hồi cấu hình mặc định",
+        "message": "Reset to default settings",
         "description": "English: Reset to default settings"
     },
     "aboutResetConfirm": {
-        "message": "Cẩn trọng! Điều này sẽ xoá tất cả cấu hình tuỳ chỉnh của bạn. Bạn chắc muốn tiến hành?",
+        "message": "Caution! this will remove all your custom settings. Are you sure you want to proceed?",
         "description": "Message asking user to confirm reset"
     },
     "loggerFilterInputPlaceholder": {
-        "message": "diễn tả bộ lọc",
+        "message": "filter expression(s)",
         "description": "Appears in the input filed where filter expressions are entered"
     },
     "loggerMaxEntriesTip": {
-        "message": "Số mục tối đa",
+        "message": "Maximum number of entries",
         "description": "Appears as a tooltip when hovering the input field"
     },
     "loggerEntryUserAgentSpoofing": {
-        "message": "giả mạo nhận diện trình duyệt với: {{value}}",
+        "message": "spoofing user agent with: {{value}}",
         "description": "An entry for when a new user agent string is selected"
     },
     "loggerEntryCookieDeleted": {
-        "message": "đã xoá cookie: {{value}}",
+        "message": "kuketo forigita: {{value}}",
         "description": "An entry for when a cookie is deleted"
     },
     "loggerEntryDeleteCookieError": {
-        "message": "không thể xoá cookie: {{value}}",
+        "message": "failed to delete cookie: {{value}}",
         "description": "An entry for when the browser cache is cleared"
     },
     "loggerEntryBrowserCacheCleared": {
-        "message": "đã xoá bộ đệm trình duyệt",
+        "message": "browser cache cleared",
         "description": "An entry for when a cookie can't be deleted"
     },
     "loggerEntryAssetUpdated": {
-        "message": "đã cập nhật tài nguyên: {{value}}",
+        "message": "asset updated: {{value}}",
         "description": "An entry for when an asset was updated"
     },
     "mainBlockedPrompt1": {
-        "message": "uMatrix đã chặn truy cập trang này:",
+        "message": "uMatrix has prevented the following page from loading:",
         "description": "English: uMatrix has prevented the following page from loading:"
     },
     "mainBlockedPrompt2": {
-        "message": "Bởi vì các luật sau",
+        "message": "Because of the following rule",
         "description": "English: Because of the following rule"
     },
     "mainBlockedBack": {
-        "message": "Trở về",
+        "message": "Reen",
         "description": "English: Go back"
     },
     "mainBlockedClose": {
-        "message": "Đóng",
+        "message": "Fermi",
         "description": "English: Close"
     },
     "commandRevertAll": {
-        "message": "Xoá tất cả thay đổi tạm thời",
+        "message": "Revert all temporary changes",
         "description": ""
     },
     "commandWhitelistPageDomain": {
-        "message": "Tạm thời thêm tên miền trang vào danh sách an toàn",
+        "message": "Temporarily whitelist page domain",
         "description": ""
     },
     "commandWhitelistAll": {
-        "message": "Tạm thời thêm tất cả vào danh sách an toàn",
+        "message": "Temporarily whitelist all",
         "description": ""
     },
     "commandOpenDashboard": {
-        "message": "Mở bảng điều khiển",
+        "message": "Malfermi la panelo",
         "description": ""
     },
     "elapsedOneMinuteAgo": {
-        "message": "một phút trước",
+        "message": "antaŭ 1 minuto",
         "description": "English: a minute ago"
     },
     "elapsedManyMinutesAgo": {
-        "message": "phút trước",
+        "message": "antaŭ {{value}} minutoj",
         "description": "English: {{value}} minutes ago"
     },
     "elapsedOneHourAgo": {
-        "message": "một giờ trước",
+        "message": "antaŭ 1 horo",
         "description": "English: an hour ago"
     },
     "elapsedManyHoursAgo": {
-        "message": "giờ trước",
+        "message": "antaŭ {{value}} horoj",
         "description": "English: {{value}} hours ago"
     },
     "elapsedOneDayAgo": {
-        "message": "một ngày trước",
+        "message": "antaŭ 1 tago",
         "description": "English: a day ago"
     },
     "elapsedManyDaysAgo": {
-        "message": "ngày trước",
+        "message": "antaŭ {{value}} tagoj",
         "description": "English: {{value}} days ago"
     },
     "showDashboardButton": {
-        "message": "Bảng điều khiển",
+        "message": "Panelo",
         "description": "Appears in Firefox's add-on preferences"
     },
     "showLoggerButton": {
-        "message": "Ghi dữ liệu",
+        "message": "Protokolilo",
         "description": "Appears in Firefox's add-on preferences"
     },
     "cloudPush": {
-        "message": "Xuất sang lưu trữ trên mây",
+        "message": "Eksporti al nuba konservado",
         "description": "tooltip"
     },
     "cloudPull": {
-        "message": "Nhập từ lưu trữ trên mây",
+        "message": "Importi el nuba konservado",
         "description": "tooltip"
     },
     "cloudNoData": {
@@ -696,19 +696,19 @@
         "description": ""
     },
     "cloudDeviceNamePrompt": {
-        "message": "Tên thiết bị:",
+        "message": "Nomo de ĉi tiu aparato:",
         "description": "used as a prompt for the user to provide a custom device name"
     },
     "genericSubmit": {
-        "message": "Xác nhận",
+        "message": "Sendi",
         "description": "for generic 'submit' buttons"
     },
     "genericRevert": {
-        "message": "Phục hồi",
+        "message": "Malfari",
         "description": "for generic 'revert' buttons"
     },
     "errorCantConnectTo": {
-        "message": "Lỗi mạng: Không thể kết nối đến {{url}}",
+        "message": "Reteraro: {{url}} ne konekteblas",
         "description": ""
     }
 }

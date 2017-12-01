@@ -7,26 +7,25 @@ echo "*** uMatrix.webext: Copying files"
 
 DES=dist/build/uMatrix.webext
 rm -rf $DES
-mkdir -p $DES/webextension
+mkdir -p $DES
 
-cp -R ./assets                           $DES/webextension/
-cp -R ./src/*                            $DES/webextension/
-cp    platform/chromium/*.html           $DES/webextension/
-cp    platform/chromium/*.js             $DES/webextension/js/
-cp -R platform/chromium/img/*            $DES/webextension/img/
-cp    LICENSE.txt                        $DES/webextension/
+cp -R ./assets                             $DES/
+cp -R ./src/*                              $DES/
+cp    platform/chromium/*.html             $DES/
+cp    platform/chromium/*.js               $DES/js/
+cp -R platform/chromium/img/*              $DES/img/
+cp    LICENSE.txt                          $DES/
 
-cp    platform/webext/background.html    $DES/webextension/
-cp    platform/webext/polyfill.js        $DES/webextension/js/
-cp    platform/webext/from-legacy.js     $DES/webextension/js/
-cp    platform/webext/manifest.json      $DES/webextension/
-cp    platform/webext/bootstrap.js       $DES/
-cp    platform/webext/chrome.manifest    $DES/
-cp    platform/webext/install.rdf        $DES/
-mv    $DES/webextension/img/icon_128.png $DES/icon.png
+cp    platform/webext/polyfill.js          $DES/js/
+cp    platform/webext/vapi-cachestorage.js $DES/js/
+cp    platform/webext/manifest.json        $DES/
+
+# webext-specific
+rm $DES/options_ui.html
+rm $DES/js/options_ui.js
 
 echo "*** uMatrix.webext: Generating meta..."
-python tools/make-webext-meta.py $DES/
+python tools/make-webext-meta.py           $DES/
 
 if [ "$1" = all ]; then
     echo "*** uMatrix.webext: Creating package..."

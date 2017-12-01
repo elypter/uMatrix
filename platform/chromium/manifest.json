@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "uMatrix",
     "short_name": "uMatrix",
-    "version": "1.0.1.2",
+    "version": "1.1.13.0",
     "description": "__MSG_extShortDesc__",
     "icons": {
         "16": "img/icon_16.png",
@@ -18,36 +18,6 @@
     "author": "Raymond Hill",
     "background": {
         "page": "background.html"
-    },
-    "commands": {
-       "revert-all": {
-            "description": "__MSG_commandRevertAll__",
-            "suggested_key": {
-                "default": "Alt+Q",
-                "mac": "Command+Shift+Q"
-            }
-        },
-       "whitelist-all": {
-            "description": "__MSG_commandWhitelistAll__",
-            "suggested_key": {
-                "default": "Alt+A",
-                "mac": "Command+Shift+A"
-            }
-        },
-       "whitelist-page-domain": {
-            "description": "__MSG_commandWhitelistPageDomain__",
-            "suggested_key": {
-                "default": "Alt+W",
-                "mac": "Command+Shift+W"
-            }
-        },
-       "open-dashboard": {
-            "description": "__MSG_commandOpenDashboard__",
-            "suggested_key": {
-                "default": "Alt+S",
-                "mac": "Command+Shift+S"
-            }
-        }
     },
     "content_scripts": [
     {

@@ -32,8 +32,9 @@
     µm.pMatrix.setSwitch('matrix-off', 'about-scheme', 1);
     µm.pMatrix.setSwitch('matrix-off', 'chrome-extension-scheme', 1);
     µm.pMatrix.setSwitch('matrix-off', 'chrome-scheme', 1);
-    µm.pMatrix.setSwitch('matrix-off', µm.behindTheSceneScope, 1);
+    µm.pMatrix.setSwitch('matrix-off', 'moz-extension-scheme', 1);
     µm.pMatrix.setSwitch('matrix-off', 'opera-scheme', 1);
+    µm.pMatrix.setSwitch('matrix-off', 'behind-the-scene', 1);
     µm.pMatrix.setSwitch('referrer-spoof', 'behind-the-scene', 2);
     µm.pMatrix.setSwitch('ua-spoof', 'behind-the-scene', 2);
     µm.pMatrix.setSwitch('https-strict', 'behind-the-scene', 2);
@@ -43,6 +44,9 @@
     µm.pMatrix.setCell('*', '*', 'frame', µm.Matrix.Red);
     µm.pMatrix.setCell('*', '1st-party', '*', µm.Matrix.Green);
     µm.pMatrix.setCell('*', '1st-party', 'frame', µm.Matrix.Green);
+
+    // https://discourse.mozilla.org/t/support-umatrix/5131/157
+    µm.pMatrix.setSwitch('matrix-off', 'wyciwyg-scheme', 1);
 
     µm.tMatrix = new µm.Matrix();
     µm.tMatrix.assign(µm.pMatrix);
